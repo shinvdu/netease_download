@@ -180,9 +180,12 @@ class neteaseMusic(object):
         '''
         urls=self.get_durls(songs)
         for i in songs:
-            song_info = self.get_song_info(i)
-            song_info['durl']=urls.get(str(i['id'])) #歌曲地址
-            self.song_infos.append(song_info)
+            try:
+                song_info = self.get_song_info(i)
+                song_info['durl']=urls.get(str(i['id'])) #歌曲地址
+                self.song_infos.append(song_info)
+            except Exception as e:
+                continue;
 
     def get_song_info(self, i):
         '''
