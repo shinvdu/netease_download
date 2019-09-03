@@ -358,7 +358,7 @@ class neteaseMusic(object):
         for i in self.song_infos:
             num = random.randint(0, 100) % 7
             col = s % (2, num + 90, i['file_name'])
-            t = modificate_file_name_for_wget(i['file_name'])
+            t = (str(ii).zfill(int(args.s)) if args.s else '') + modificate_file_name_for_wget(i['file_name'])
             file_name = os.path.join(dir_, t)
             if os.path.exists(file_name) or not i['durl']:  # if file exists, no get_durl
                 if not i['durl']:
@@ -441,6 +441,8 @@ if __name__ == '__main__':
     p.add_argument('-d','--dir', help='save files to this dir',default="mp3")
     p.add_argument('-c', '--undownload', action='store_true', \
         help='no download, using to renew id3 tags')
+    p.add_argument('-s', \
+        help='Add sort number prefix, like -s 3, add prefix 001 etc. ')
 #     args = p.parse_args(args=["http://music.163.com/#/song?id=27836179"])
 #     args = p.parse_args(args=["http://music.163.com/#/album?id=37253721"])
 #     args = p.parse_args(args=["http://music.163.com/#/playlist?id=2225407480"])
